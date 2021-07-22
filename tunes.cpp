@@ -1,6 +1,6 @@
 #include "upTune.h"
 
-const note_t short_beep[] PROGMEM = {REST S64TH, D_6 TH32ND, END};
+const note_t short_beep[] PROGMEM = {REST S64TH, A_6 TH32ND, END};
 const note_t triple_beep[] PROGMEM = {REST S64TH,  D_6 TH32ND, REST TH32ND, D_6 TH32ND,
                                       REST TH32ND, D_6 TH32ND, REST TH32ND, END};
 const note_t d_major_arp_up[] PROGMEM = {REST S64TH,  D_6 TH32ND, REST TH32ND, FS_6 TH32ND,
