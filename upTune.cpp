@@ -1,6 +1,12 @@
 #include <Arduino.h>
 
+#ifdef DEBUG_ALL
+#define DEBUG_UPTUNE
+#endif
+
+#ifdef DEBUG_UPTUNE
 #include <aprintf.h>
+#endif
 
 #include "upTune.h"
 // -------
@@ -18,17 +24,19 @@
 void upTune::jump(uint8_t pos) {
   this->pos = pos;
 
-  aprintf(F("jump!\n"));
+#ifdef DEBUG_UPTUNE
+  aprintf(F("upTune::jump(pos=%d)\n"), pos);
+#endif
 
   const note_t note = pgm_read_word_near(song + pos);
 
   if (note != END) {
     uint32_t duration = NOTE_DURATION_MS(note, tempo);
-    // aprintf(F("duration: %d  (whole=%d; symbolix=%d)\n"), duration, WHOLENOTE_DURATION(tempo),
-    //         NOTE_DURATION(note));
-    // aprintf(F("WHOLE: %d\n"), WHOLENOTE_DURATION(tempo));
-    aprintf(F("DUR: %d\n"), NOTE_DURATION(note));
-    aprintf(F("DUR_MS: %d\n"), duration);
+
+#ifdef DEBUG_UPTUNE
+    aprintf(F("upTune next note: F=%d dur(frac)=%d\n"), NOTE_FREQ(note), NOTE_DURATION(note));
+#endif
+
     next_note_time = millis() + duration;
     // sound.tone(NOTE_FREQ(note), duration - (duration > 40 ? NOTE_GAP : 0));
     sound.tone(NOTE_FREQ(note), duration);
