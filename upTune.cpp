@@ -38,7 +38,6 @@ void upTune::jump(uint8_t pos) {
 #endif
 
     next_note_time = millis() + duration;
-    // sound.tone(NOTE_FREQ(note), duration - (duration > 40 ? NOTE_GAP : 0));
     sound.tone(NOTE_FREQ(note), duration);
   } else {
     next_note_time = 0;
